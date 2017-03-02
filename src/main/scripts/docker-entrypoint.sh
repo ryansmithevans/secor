@@ -61,7 +61,10 @@ if [[ ! -z "$S3_PATH" ]]; then
     SECOR_CONFIG="$SECOR_CONFIG -Dsecor.s3.path=$S3_PATH"
     echo "secor.s3.path=$S3_PATH"
 fi
-
+if [[ ! -z "$AWS_SSE_TYPE" ]]; then
+    SECOR_CONFIG="$SECOR_CONFIG -Daws.sse.type=$AWS_SSE_TYPE"
+    echo "aws.sse.type=$AWS_SSE_TYPE"
+fi
 
 
 if [[ ! -z "$SECOR_MAX_FILE_BYTES" ]]; then
@@ -86,6 +89,16 @@ if [[ ! -z "$SECOR_MESSAGE_PARSER" ]]; then
 	SECOR_CONFIG="$SECOR_CONFIG -Dsecor.message.parser.class=$SECOR_MESSAGE_PARSER"
     echo "secor.message.parser.class=$SECOR_MESSAGE_PARSER"
 fi
+if [[ ! -z "$SECOR_UPLOAD_MANAGER" ]]; then
+	SECOR_CONFIG="$SECOR_CONFIG -Dsecor.upload.manager.class=$SECOR_UPLOAD_MANAGER"
+    echo "secor.upload.manager.class=$SECOR_UPLOAD_MANAGER"
+fi
+
+if [[ ! -z "$MESSAGE_TIMESTAMP_INPUT_PATTERN" ]]; then
+	SECOR_CONFIG="$SECOR_CONFIG -Dmessage.timestamp.input.pattern=$MESSAGE_TIMESTAMP_INPUT_PATTERN"
+    echo "message.timestamp.input.pattern=$MESSAGE_TIMESTAMP_INPUT_PATTERN"
+fi
+
 SECOR_CONFIG="$SECOR_CONFIG $SECOR_EXTRA_OPTS"
 
 
